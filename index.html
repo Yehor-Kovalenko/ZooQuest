@@ -1,100 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Orientarium Zoo Map</title>
-  
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      background: #e5e5e5;
-      font-family: Arial, sans-serif;
-    }
-    #map {
-      height: 100%;
-      width: 100%;
-    }
-    #status {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 10px 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1F6F54">
+    <title>ZOO Łódź Passport — Field Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <div id="status">Acquiring GPS location...</div>
-  <div id="map"></div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script>
-    // 1. Correct bounding box around Orientarium Zoo Łódź (NW corner to SE corner)
-    const southWest = L.latLng(51.7565, 19.4050);
-    const northEast = L.latLng(51.7645, 19.4180);
-    const bounds = L.latLngBounds(southWest, northEast);
-
-    // 2. Initialize Leaflet map with boundaries restricted strictly to the zoo area
-    const map = L.map('map', {
-      maxBounds: bounds,
-      maxBoundsViscosity: 1.0, // Prevents dragging outside the image bounds
-      minZoom: 15,
-      maxZoom: 19
-    }).fitBounds(bounds);
-
-    
-
-    // 4. Overlay the map image cleanly onto the GPS coordinates
-    const imageUrl = 'map.jpg';
-    L.imageOverlay(imageUrl, bounds, {
-      opacity: 0.85,
-      interactive: true
-    }).addTo(map);
-
-    // 5. Track live GPS movement
-    let userMarker = null;
-    let accuracyCircle = null;
-    const statusDiv = document.getElementById('status');
-
-    function onLocationFound(e) {
-      const radius = e.accuracy / 2;
-      const latlng = e.latlng;
-
-      if (!userMarker) {
-        userMarker = L.marker(latlng).addTo(map).bindPopup("You are here");
-        accuracyCircle = L.circle(latlng, radius).addTo(map);
-      } else {
-        userMarker.setLatLng(latlng);
-        accuracyCircle.setLatLng(latlng);
-        accuracyCircle.setRadius(radius);
-      }
-
-      statusDiv.innerHTML = `<strong>Live GPS:</strong> ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)} (±${Math.round(radius)}m)`;
-    }
-
-    function onLocationError(e) {
-      statusDiv.innerHTML = `<span style="color:red;">GPS Error: ${e.message}</span>`;
-    }
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
-
-    map.locate({
-      watch: true,
-      enableHighAccuracy: true
-    });
-  </script>
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
