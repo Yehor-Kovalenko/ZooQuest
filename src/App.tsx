@@ -2,9 +2,6 @@ import { useState } from 'react'
 
 import { Toaster } from "@/components/ui/toast"
 
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 import MainContainer from './layout/MainContainer'
 import HeaderContainer from './layout/HeaderContainer'
