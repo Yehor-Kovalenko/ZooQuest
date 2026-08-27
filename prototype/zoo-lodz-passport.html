@@ -208,7 +208,6 @@
       </div>
       <div class="clock-wrap">
         <div class="clock" id="clock">--:--:--</div>
-        <div class="clock-date" id="clock-date">—</div>
       </div>
     </div>
     <span class="pill" id="status-pill">Checking hours…</span>
@@ -544,8 +543,7 @@ function tick(){
   const {h,m,s} = warsawParts(now);
   const pad = n => String(n).padStart(2,'0');
   document.getElementById('clock').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-  document.getElementById('clock-date').textContent = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Warsaw', weekday:'long', day:'numeric', month:'long'}).format(now) + ' · Warsaw time';
-
+  
   const mins = h*60+m;
   const pill = document.getElementById('status-pill');
   if(mins < 9*60){ pill.textContent='Opens at 9:00'; pill.className='pill pill-closed'; }

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import styles from './HeaderContainer.module.css'
+import logo from '@/assets/Adobe Express - file.png';
 
 type WarsawTime = {
   h: number;
@@ -81,22 +83,15 @@ const HeaderContainer = () => {
 
   const clock = `${pad(h)}:${pad(m)}:${pad(s)}`;
 
-  const date = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Warsaw",
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(now);
 
   const status = getZooStatus(h, m);
 
   return (
     <>
       <header>
-        <div className="brand-row">
-          <div className="brand">
-            <h1>ZOO ŁÓDŹ</h1>
-            <p>Field Passport</p>
+        <div className={styles.brandRow}>
+      <img src={logo} alt="Zoo Łódź Logo" className={styles.brandLogo} />
+      <div className="brand">
           </div>
 
           <div className="clock-wrap">
@@ -104,9 +99,6 @@ const HeaderContainer = () => {
               {clock}
             </div>
 
-            <div className="clock-date">
-              {date} · Warsaw time
-            </div>
           </div>
         </div>
 
