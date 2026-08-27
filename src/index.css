@@ -127,11 +127,6 @@ header {
   font-weight: 500;
   line-height: 1;
 }
-.clock-date {
-  font-size: 0.66rem;
-  color: #cfe3d8;
-  margin-top: 2px;
-}
 .pill {
   display: inline-block;
   margin-top: 10px;
