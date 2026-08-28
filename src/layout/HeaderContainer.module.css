@@ -1,3 +1,65 @@
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--zoo-primary);
+  color: #f4efe1;
+  padding: 14px 18px 12px;
+  border-bottom: 4px solid var(--zoo-primary);
+  background-image:
+    linear-gradient(var(--zoo-primary), var(--zoo-primary)),
+    radial-gradient(
+      circle at 90% -10%,
+      rgba(244, 239, 225, 0.1),
+      transparent 55%
+    );
+}
+
+
+.clockWrap {
+  text-align: right;
+  font-family: "IBM Plex Mono", monospace;
+}
+.clock {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+.pill {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  background: rgba(244, 239, 225, 0.14);
+  border: 1px solid rgba(244, 239, 225, 0.35);
+}
+.pillOpen {
+  background: rgba(184, 134, 47, 0.22);
+  border-color: var(--gold);
+  color: #ffe9b8;
+}
+.pillAmber {
+  background: rgba(166, 51, 43, 0.22);
+  border-color: #e0a29c;
+  color: #ffd8d2;
+}
+.pillClosed {
+  background: rgba(0, 0, 0, 0.18);
+  border-color: rgba(244, 239, 225, 0.3);
+  color: #e6e0cf;
+}
+
+.perf {
+  height: 10px;
+  background-image: url('@/assets/separator.png');
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+
 .brandRow {
   display: flex;
   align-items: center;

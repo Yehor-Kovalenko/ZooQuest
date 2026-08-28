@@ -1,0 +1,32 @@
+.newsNote {
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-bottom: 14px;
+}
+.newsCard {
+  background: var(--paper-deep);
+  border: 1px solid var(--paper-shadow);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.newsDate {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--stamp);
+}
+.newsCard p {
+  margin: 4px 0 6px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+.newsCard a {
+  font-size: 0.76rem;
+  color: var(--zoo-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.newsCard a:hover {
+  text-decoration: underline;
+}

@@ -1,3 +1,5 @@
+import styles from './NewsPanel.module.css'
+
 const NewsPanel = () => {
   const NEWS = [
     {id: 1, date:'29 Apr 2026', title:"Poland's largest walk-through butterfly house opens inside the Orientarium.", url:'https://orientarium.lodz.pl/en/polands-largest-butterfly-house-is-now-open-only-at-the-lodz-zoo-orientarium/'},
@@ -8,14 +10,14 @@ const NewsPanel = () => {
   ];
 
   return (
-    <div id="news-panel">
-      <p className="news-note">Dispatches from the zoo — snapshot from the official newsroom, tap through for the latest.</p>
+    <div id={styles.newsPanel}>
+      <p className={styles.newsNote}>Dispatches from the zoo — snapshot from the official newsroom, tap through for the latest.</p>
       <div id="news-list">
         { NEWS.map(n=> (
-          <div className="news-card" key={n.id} >
-            <div className="news-date">${n.date}</div>
-            <p>${n.title}</p>
-            <a href="${n.url}" target="_blank" rel="noopener">Read more →</a>
+          <div className={styles.newsCard} key={n.id} >
+            <div className={styles.newsDate}>{n.date}</div>
+            <p>{n.title}</p>
+            <a href={n.url} target="_blank" rel="noopener">Read more →</a>
           </div> )
         ) }
       </div>

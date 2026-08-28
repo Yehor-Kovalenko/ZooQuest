@@ -1,0 +1,10 @@
+main {
+  padding: 16px 16px 8px;
+}
+.panel {
+  display: none;
+}
+.panel.active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}

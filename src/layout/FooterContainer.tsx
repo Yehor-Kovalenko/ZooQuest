@@ -1,4 +1,4 @@
-import { toast } from "@/components/ui/toast"
+import styles from "./FooterContainer.module.css"
 import type { FooterTab } from "../App";
 
 type FooterContainerProps = {
@@ -18,12 +18,12 @@ const FooterContainer = ({
   ];
 
   return (
-    <nav className="tabbar">
+    <nav className={styles.tabbar}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`nav-btn ${
-            activeTab === tab.id ? "active" : ""
+          className={`${styles.navbtn} ${
+            activeTab === tab.id ? styles.active : ""
           }`}
           onClick={() => onTabChange(tab.id)}
         >

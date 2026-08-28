@@ -2,6 +2,7 @@ import FoodPanel from './panels/FoodPanel';
 import MapPanel from './panels/MapPanel';
 import NewsPanel from './panels/NewsPanel';
 import type { FooterTab } from '../App';
+import './MainContainer.css';
 
 type MainContainerProps = {
   activeTab: FooterTab;

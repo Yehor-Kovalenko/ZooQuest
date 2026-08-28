@@ -41,27 +41,27 @@ function getZooStatus(h: number, m: number): ZooStatus {
   if (mins < 9 * 60) {
     return {
       text: "Opens at 9:00",
-      className: "pill pill-closed",
+      className: `${styles.pill} ${styles.pillClosed}`,
     };
   }
 
   if (mins < 18 * 60 + 45) {
     return {
       text: "Open · pavilions close 18:45",
-      className: "pill pill-open",
+      className: `${styles.pill} ${styles.pillOpen}`,
     };
   }
 
   if (mins < 19 * 60) {
     return {
       text: "Grounds closing now",
-      className: "pill pill-amber",
+      className: `${styles.pill} ${styles.pillAmber}`,
     };
   }
 
   return {
     text: "Closed · opens 9:00 tomorrow",
-    className: "pill pill-closed",
+    className: `${styles.pill} ${styles.pillClosed}`,
   };
 }
 
@@ -92,10 +92,10 @@ const HeaderContainer = () => {
       <header>
         <div className={styles.brandRow}>
       <img src={logo} alt="Zoo Łódź Logo" className={styles.brandLogo} />
-      <div className="brand">
+      <div className={styles.Brand}>
           </div>
 
-          <div className="clock-wrap">
+          <div className={styles.clockWrap}>
             <div className="clock">
               {clock}
             </div>
