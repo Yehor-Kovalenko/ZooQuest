@@ -96,7 +96,7 @@ const HeaderContainer = () => {
           </div>
 
           <div className={styles.clockWrap}>
-            <div className="clock">
+            <div className={styles.clock}>
               {clock}
             </div>
 
@@ -108,9 +108,8 @@ const HeaderContainer = () => {
         </span>
       {/* Feeding Notification Banner */}
       <FeedingBanner />
+      <div className={styles.perf}></div>
     </header>
-
-      <div className="perf"></div>
     </>
   );
 };

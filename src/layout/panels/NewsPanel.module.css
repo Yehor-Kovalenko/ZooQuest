@@ -1,11 +1,11 @@
 .newsNote {
   font-size: 0.76rem;
-  color: var(--ink-soft);
+  color: #54604f;
   text-align: center;
   margin-bottom: 14px;
 }
 .newsCard {
-  background: var(--paper-deep);
+  background: var(--paper);
   border: 1px solid var(--paper-shadow);
   border-radius: var(--radius);
   padding: 12px 14px;

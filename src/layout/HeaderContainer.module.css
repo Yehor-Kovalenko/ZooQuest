@@ -4,8 +4,8 @@ header {
   z-index: 20;
   background: var(--zoo-primary);
   color: #f4efe1;
-  padding: 14px 18px 12px;
-  border-bottom: 4px solid var(--zoo-primary);
+  padding: 14px 18px;
+  padding-bottom: 0;
   background-image:
     linear-gradient(var(--zoo-primary), var(--zoo-primary)),
     radial-gradient(
@@ -38,7 +38,7 @@ header {
 }
 .pillOpen {
   background: rgba(184, 134, 47, 0.22);
-  border-color: var(--gold);
+  border-color: #b8862f;
   color: #ffe9b8;
 }
 .pillAmber {
@@ -54,6 +54,10 @@ header {
 
 .perf {
   height: 10px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
   background-image: url('@/assets/separator.png');
   background-size: auto 100%;
   background-repeat: repeat-x;

@@ -1,23 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
-
-@custom-variant dark (&:is(.dark *));
 
 :root {
+  --footer-height: 60px;
   --paper: #efe6d3;
-  --paper-deep: #e4d6ba;
   --paper-shadow: #d5c39c;
-  --ink: #1c2b22;
   --ink-soft: #54604f;
   --zoo-primary: #24262f;
-  --stamp: #a6332b;
-  --stamp-deep: #7c2620;
-  --gold: #b8862f;
-  --sky: #3e7ca6;
-  --sky-deep: #26536e;
-  --line: rgba(28, 43, 34, 0.16);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -55,10 +45,18 @@
   box-sizing: border-box;
 }
 html,
-body {
+body, #root {
   margin: 0;
   padding: 0;
+  height: 100vh;
+  width: 100vw;
 }
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   background:
     radial-gradient(
@@ -68,7 +66,6 @@ body {
       )
       0 0/14px 14px,
     var(--paper);
-  color: var(--ink);
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }

@@ -1,80 +1,114 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import mapImage from '@/assets/map.png'
 import 'leaflet/dist/leaflet.css';
-import './MapPanel.css'; // Add any additional styling here
+import './MapPanel.css';
 
 const MapPanel = () => {
   const mapRef = useRef<HTMLDivElement>(null);
+  const leafletMapRef = useRef<L.Map | null>(null);
   const [gpsStatus, setGpsStatus] = useState('Acquiring GPS location...');
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || leafletMapRef.current) return;
 
-    // 1. Map Initialization
-    const map = L.map(mapRef.current, {
-      minZoom: 15,
-      maxZoom: 19,
-    });
+    const img = new Image();
+    // dynamically load the image and know its resolution
+    img.onload = () => {
+      if (!mapRef.current || leafletMapRef.current) return;
 
-    // 2. Bounds Setup
-    const southWest = L.latLng(51.7565, 19.4050);
-    const northEast = L.latLng(51.7645, 19.4180);
-    const bounds = L.latLngBounds(southWest, northEast);
-    
-    map.setMaxBounds(bounds);
-    map.options.maxBoundsViscosity = 1.0;
-    map.fitBounds(bounds);
+      const width = img.naturalWidth;
+      const height = img.naturalHeight;
 
-    // 3. Image Overlay (ensure map.jpg is in your public folder)
-    L.imageOverlay(mapImage, bounds, {
-      opacity: 0.85,
-      interactive: true,
-    }).addTo(map);
+      const map = L.map(mapRef.current, {
+        crs: L.CRS.Simple,
+        minZoom: -1,
+        maxZoom: 5,
+      });
 
-    // 4. GPS Tracking Logic
-    let userMarker: L.Marker | null = null;
-    let accuracyCircle: L.Circle | null = null;
+      leafletMapRef.current = map;
 
-    const onLocationFound = (e: L.LocationEvent) => {
-      const radius = e.accuracy / 2;
-      const latlng = e.latlng;
+      // Image coordinates:
+      // top-left     = [0, 0]
+      // bottom-right = [height, width]
+      const bounds: L.LatLngBoundsExpression = [
+        [0, 0],
+        [height, width],
+      ];
 
-      if (!userMarker || !accuracyCircle) {
-        userMarker = L.marker(latlng).addTo(map).bindPopup('You are here');
-        accuracyCircle = L.circle(latlng, radius).addTo(map);
-      } else {
-        userMarker.setLatLng(latlng);
-        accuracyCircle.setLatLng(latlng);
-        accuracyCircle.setRadius(radius);
-      }
+      // Keep the user inside the image
+      map.setMaxBounds(bounds);
+      map.options.maxBoundsViscosity = 1.0;
 
-      setGpsStatus(
-        `Live GPS: ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)} (±${Math.round(radius)}m)`
-      );
+      // Add the PNG
+      L.imageOverlay(mapImage, bounds, {
+        opacity: 0.85,
+        interactive: true,
+      }).addTo(map);
+
+      // Fit image to viewport
+      map.fitBounds(bounds);
+
+      // --------------------------------
+      // GPS
+      // --------------------------------
+
+      let userMarker: L.Marker | null = null;
+      let accuracyCircle: L.Circle | null = null;
+
+      const onLocationFound = (e: L.LocationEvent) => {
+        const radius = e.accuracy / 2;
+        const latlng = e.latlng;
+
+        if (!userMarker || !accuracyCircle) {
+          userMarker = L.marker(latlng)
+            .addTo(map)
+            .bindPopup("You are here");
+
+          accuracyCircle = L.circle(latlng, radius).addTo(map);
+        } else {
+          userMarker.setLatLng(latlng);
+          accuracyCircle.setLatLng(latlng);
+          accuracyCircle.setRadius(radius);
+        }
+
+        setGpsStatus(
+          `Live GPS: ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(
+            5
+          )} (±${Math.round(radius)}m)`
+        );
+      };
+
+      const onLocationError = (e: L.ErrorEvent) => {
+        setGpsStatus(`GPS Error: ${e.message}`);
+      };
+
+      map.on("locationfound", onLocationFound);
+      map.on("locationerror", onLocationError);
+
+      map.locate({
+        watch: true,
+        enableHighAccuracy: true,
+      });
     };
 
-    const onLocationError = (e: L.ErrorEvent) => {
-      setGpsStatus(`GPS Error: ${e.message}`);
+    img.onerror = () => {
+      setGpsStatus("Failed to load map image.");
     };
 
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
+    img.src = mapImage;
 
-    map.locate({ watch: true, enableHighAccuracy: true });
-
-    // Cleanup function to destroy map instance when component unmounts
+    // Cleanup
     return () => {
-      map.off('locationfound', onLocationFound);
-      map.off('locationerror', onLocationError);
-      map.remove();
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+      }
     };
   }, []);
 
   return (
     <div id="map-panel">
-
-      {/* Existing UI */}
       <div className="progress-row">
         <strong>Your route</strong>
         <span id="progress-text">0 / 0 stamped</span>
@@ -83,32 +117,12 @@ const MapPanel = () => {
         <div className="progress-fill" id="progress-fill"></div>
       </div>
 
-      <div className="trail-wrap">
-        {/* Map Container */}
-      <div style={{ position: 'relative', height: '400px', width: '100%', marginBottom: '20px' }}>
-        <div 
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            zIndex: 1000,
-            background: 'rgba(255, 255, 255, 0.95)',
-            padding: '10px 15px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
-            fontSize: '14px',
-            color: gpsStatus.includes('Error') ? 'red' : 'black'
-          }}
-        >
-          {gpsStatus}
-        </div>
-        <div ref={mapRef} style={{ height: '100%', width: '100%', borderRadius: '8px' }} />
+      {/* Map Container */}
+      <div className='gpsStatus' style={{color: gpsStatus.includes('Error') ? 'red' : 'black'}}>
+        {gpsStatus}
       </div>
-      </div>
-
-      <div id="zone-list"></div>
-
       
+      <div ref={mapRef} className='mapContainer' />
     </div>
   );
 };

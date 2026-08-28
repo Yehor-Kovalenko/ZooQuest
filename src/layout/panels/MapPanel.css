@@ -1,4 +1,8 @@
 /* ---------- Progress ---------- */
+.map-panel {
+  height: 100%;
+  flex: 1;
+}
 .progress-row {
   display: flex;
   justify-content: space-between;
@@ -8,7 +12,7 @@
 .progress-row span {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.8rem;
-  color: var(--ink-soft);
+  color: #54604f;
 }
 .progress-bar {
   height: 8px;
@@ -19,7 +23,27 @@
 }
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--zoo-primary), var(--gold));
+  background: linear-gradient(90deg, var(--zoo-primary), #b8862f);
   width: 0%;
   transition: width 0.3s ease;
+}
+
+.mapContainer { 
+  position: absolute; 
+  height: 100%;
+  min-height: 100px;
+  width: 100%; 
+}
+
+.gpsStatus {
+  /* position: 'absolute';
+  top: 10px;
+  left: 10px; */
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  font-size: 14px;
+  margin-bottom: 10px;
 }
