@@ -1,0 +1,57 @@
+.feedingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  width: fit-content;
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.label {
+  color: #a0aec0;
+}
+
+.time {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.divider {
+  color: #4a5568;
+}
+
+.animal {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.location {
+  color: #718096;
+  font-size: 0.78rem;
+}

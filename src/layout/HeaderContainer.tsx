@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from './HeaderContainer.module.css'
 import logo from '@/assets/Adobe Express - file.png';
+import { FeedingBanner } from './panels/FeedingBanner';
 
 type WarsawTime = {
   h: number;
@@ -105,7 +106,9 @@ const HeaderContainer = () => {
         <span className={status.className}>
           {status.text}
         </span>
-      </header>
+      {/* Feeding Notification Banner */}
+      <FeedingBanner />
+    </header>
 
       <div className="perf"></div>
     </>
