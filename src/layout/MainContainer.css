@@ -1,6 +1,13 @@
-main, main > :first-child {
-  padding: 16px 16px calc(8px + var(--footer-height));
+main {
+  padding-bottom: var(--footer-height);
   min-height: 0;
   flex: 1 1 auto;
+}
+
+main > :first-child {
   overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  padding: 16px 16px;
+  margin: 0;
 }

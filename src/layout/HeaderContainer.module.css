@@ -67,12 +67,12 @@ header {
 .brandRow {
   display: flex;
   align-items: center;
-  gap: 12px; /* Adjust spacing between logo and text */
+  gap: 12px;
 }
 
 .brandLogo {
-  width: 50px; /* Adjust size to fit your header layout */
-  background-color: coral;
-  height: 50px;
+  width: 64px; 
+  height: 64px;
   object-fit: contain;
+  filter: invert(90%);
 }

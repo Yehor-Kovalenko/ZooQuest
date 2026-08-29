@@ -22,7 +22,7 @@ const MapPanel = () => {
 
       const map = L.map(mapRef.current, {
         crs: L.CRS.Simple,
-        minZoom: -1,
+        minZoom: -3,
         maxZoom: 5,
       });
 
