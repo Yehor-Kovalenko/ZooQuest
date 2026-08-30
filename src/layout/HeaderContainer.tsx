@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './HeaderContainer.module.css'
 import logo from '@/assets/Adobe Express - file.png';
 import { FeedingBanner } from './panels/FeedingBanner';
+import { useTranslation } from "react-i18next";
 
 type WarsawTime = {
   h: number;
@@ -67,6 +68,8 @@ function getZooStatus(h: number, m: number): ZooStatus {
 
 const HeaderContainer = () => {
   const [now, setNow] = useState(() => new Date());
+  const { i18n } = useTranslation();
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -109,6 +112,13 @@ const HeaderContainer = () => {
       {/* Feeding Notification Banner */}
       <FeedingBanner />
       <div className={styles.perf}></div>
+      <select
+      value={i18n.language}
+      onChange={(e) => i18n.changeLanguage(e.target.value)}
+    >
+      <option value="en">English</option>
+      <option value="pl">Polski</option>
+    </select>
     </header>
     </>
   );

@@ -6,6 +6,7 @@ import './App.css'
 import MainContainer from './layout/MainContainer'
 import HeaderContainer from './layout/HeaderContainer'
 import FooterContainer from './layout/FooterContainer'
+import '@/i18n'
 
 export type FooterTab = "map" | "food" | "news";
 
