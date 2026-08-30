@@ -1,0 +1,21 @@
+{
+  "common": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "loading": "Ładowanie..."
+  },
+  "header": {
+  },
+  "footer": {
+
+  },
+  "food": {
+
+  },
+  "map": {
+
+  },
+  "news": {
+
+  }
+}

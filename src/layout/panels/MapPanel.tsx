@@ -51,7 +51,7 @@ const MapPanel = () => {
 
       // Add the PNG
       L.imageOverlay(mapImage, bounds, {
-        opacity: 0.85,
+        opacity: 1.0,
         interactive: true,
       }).addTo(map);
 
@@ -66,25 +66,25 @@ const MapPanel = () => {
       let accuracyCircle: L.Circle | null = null;
 
       const onLocationFound = (e: L.LocationEvent) => {
-      const { lat, lng } = e.latlng;
-      const { x, y } = gpsToPixel(affineTransform, lat, lng);
-      const imgLatLng = L.latLng(y, x); // remember: latlng = [pixelY, pixelX]
-          
-      // Optional: scale accuracy circle radius from meters to pixels
-      const pixelsPerMeterX = Math.hypot(affineTransform.a, affineTransform.d) / metersPerDegreeLng(lat);
-      const radiusPx = (e.accuracy / 2) * pixelsPerMeterX; // rough approximation, see note below
-          
-      if (!userMarker || !accuracyCircle) {
-        userMarker = L.marker(imgLatLng).addTo(map).bindPopup("You are here");
-        accuracyCircle = L.circle(imgLatLng, radiusPx).addTo(map);
-      } else {
-        userMarker.setLatLng(imgLatLng);
-        accuracyCircle.setLatLng(imgLatLng);
-        accuracyCircle.setRadius(radiusPx);
-      }
+        const { lat, lng } = e.latlng;
+        const { x, y } = gpsToPixel(affineTransform, lat, lng);
+        const imgLatLng = L.latLng(y, x); // remember: latlng = [pixelY, pixelX]
+
+        // scale accuracy circle radius from meters to pixels
+        const pixelsPerMeterX = Math.hypot(affineTransform.a, affineTransform.d) / metersPerDegreeLng(lat);
+        const radiusPx = (e.accuracy / 2) * pixelsPerMeterX; // rough approximation, see note below
+
+        if (!userMarker || !accuracyCircle) {
+          userMarker = L.marker(imgLatLng).addTo(map).bindPopup("You are here");
+          accuracyCircle = L.circle(imgLatLng, radiusPx).addTo(map);
+        } else {
+          userMarker.setLatLng(imgLatLng);
+          accuracyCircle.setLatLng(imgLatLng);
+          accuracyCircle.setRadius(radiusPx);
+        }
     
-      setGpsStatus(`Live GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)} (±${Math.round(e.accuracy)}m)`);
-    };
+        setGpsStatus(`Live GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)} (±${Math.round(e.accuracy)}m)`);
+      };
 
       const onLocationError = (e: L.ErrorEvent) => {
         setGpsStatus(`GPS Error: ${e.message}`);
