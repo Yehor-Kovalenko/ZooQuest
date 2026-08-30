@@ -3,11 +3,20 @@ import L from 'leaflet';
 import mapImage from '@/assets/map.png'
 import 'leaflet/dist/leaflet.css';
 import './MapPanel.css';
+import { computeAffineTransform, gpsToPixel, metersPerDegreeLng, type ControlPoint } from '@/service/geoTransformation';
 
 const MapPanel = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
   const [gpsStatus, setGpsStatus] = useState('Acquiring GPS location...');
+  // transformation
+  const CONTROL_POINTS: [ControlPoint, ControlPoint, ControlPoint] = [
+    { geo: { lat: 51.75116105683058, lng: 19.436786676250716 }, pixel: { x: 0, y: 0 } },
+    { geo: { lat: 51.744968125338296, lng: 19.461429908793267 }, pixel: { x: 1802, y: 882 } },
+    { geo: { lat: 51.7483180437013, lng: 19.45106338292666 }, pixel: { x: 901, y: 441 } },
+  ];
+
+  const affineTransform = computeAffineTransform(CONTROL_POINTS);
 
   useEffect(() => {
     if (!mapRef.current || leafletMapRef.current) return;
@@ -57,27 +66,25 @@ const MapPanel = () => {
       let accuracyCircle: L.Circle | null = null;
 
       const onLocationFound = (e: L.LocationEvent) => {
-        const radius = e.accuracy / 2;
-        const latlng = e.latlng;
-
-        if (!userMarker || !accuracyCircle) {
-          userMarker = L.marker(latlng)
-            .addTo(map)
-            .bindPopup("You are here");
-
-          accuracyCircle = L.circle(latlng, radius).addTo(map);
-        } else {
-          userMarker.setLatLng(latlng);
-          accuracyCircle.setLatLng(latlng);
-          accuracyCircle.setRadius(radius);
-        }
-
-        setGpsStatus(
-          `Live GPS: ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(
-            5
-          )} (±${Math.round(radius)}m)`
-        );
-      };
+      const { lat, lng } = e.latlng;
+      const { x, y } = gpsToPixel(affineTransform, lat, lng);
+      const imgLatLng = L.latLng(y, x); // remember: latlng = [pixelY, pixelX]
+          
+      // Optional: scale accuracy circle radius from meters to pixels
+      const pixelsPerMeterX = Math.hypot(affineTransform.a, affineTransform.d) / metersPerDegreeLng(lat);
+      const radiusPx = (e.accuracy / 2) * pixelsPerMeterX; // rough approximation, see note below
+          
+      if (!userMarker || !accuracyCircle) {
+        userMarker = L.marker(imgLatLng).addTo(map).bindPopup("You are here");
+        accuracyCircle = L.circle(imgLatLng, radiusPx).addTo(map);
+      } else {
+        userMarker.setLatLng(imgLatLng);
+        accuracyCircle.setLatLng(imgLatLng);
+        accuracyCircle.setRadius(radiusPx);
+      }
+    
+      setGpsStatus(`Live GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)} (±${Math.round(e.accuracy)}m)`);
+    };
 
       const onLocationError = (e: L.ErrorEvent) => {
         setGpsStatus(`GPS Error: ${e.message}`);
