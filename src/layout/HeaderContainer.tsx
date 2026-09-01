@@ -15,6 +15,7 @@ type ZooStatus = {
   className: string;
 };
 
+
 function getWarsawTime(date: Date): WarsawTime {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Europe/Warsaw",
@@ -36,39 +37,39 @@ function getWarsawTime(date: Date): WarsawTime {
   };
 }
 
-function getZooStatus(h: number, m: number): ZooStatus {
+function getZooStatus(h: number, m: number, t: any): ZooStatus {
   const mins = h * 60 + m;
 
   if (mins < 9 * 60) {
     return {
-      text: "Opens at 9:00",
+      text: t("header.opensAt", { time: "9:00" }),
       className: `${styles.pill} ${styles.pillClosed}`,
     };
   }
 
   if (mins < 18 * 60 + 45) {
     return {
-      text: "Open · pavilions close 18:45",
+      text: t("header.open", { time: "18:45" }),
       className: `${styles.pill} ${styles.pillOpen}`,
     };
   }
 
   if (mins < 19 * 60) {
     return {
-      text: "Grounds closing now",
+      text: t("header.groundsClosing"),
       className: `${styles.pill} ${styles.pillAmber}`,
     };
   }
 
   return {
-    text: "Closed · opens 9:00 tomorrow",
+    text: t("header.closed", { time: "9:00" }),
     className: `${styles.pill} ${styles.pillClosed}`,
   };
 }
 
 const HeaderContainer = () => {
   const [now, setNow] = useState(() => new Date());
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
 
   useEffect(() => {
@@ -88,7 +89,7 @@ const HeaderContainer = () => {
   const clock = `${pad(h)}:${pad(m)}:${pad(s)}`;
 
 
-  const status = getZooStatus(h, m);
+  const status = getZooStatus(h, m, t);
 
   return (
     <>

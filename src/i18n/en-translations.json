@@ -5,13 +5,16 @@
     "loading": "Loading..."
   },
   "header": {
+    "opensAt": "Opens at {{time}}",
+    "open": "Open · pavilions close {{time}}",
+    "groundsClosing": "Grounds closing now",
+    "closed": "Closed · opens {{time}} tomorrow"
   },
   "footer": {
 
   },
-  "food": {
+  "food": {},
 
-  },
   "map": {
 
   },
