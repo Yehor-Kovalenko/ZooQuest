@@ -3,20 +3,21 @@ import L from 'leaflet';
 import mapImage from '@/assets/map.png'
 import 'leaflet/dist/leaflet.css';
 import './MapPanel.css';
-import { computeAffineTransform, gpsToPixel, metersPerDegreeLng, type ControlPoint } from '@/service/geoTransformation';
+import { createGeoTransformer, type ControlPoint } from '@/service/geoTransformation';
 
 const MapPanel = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
   const [gpsStatus, setGpsStatus] = useState('Acquiring GPS location...');
   // transformation
-  const CONTROL_POINTS: [ControlPoint, ControlPoint, ControlPoint] = [
-    { geo: { lat: 51.75116105683058, lng: 19.436786676250716 }, pixel: { x: 0, y: 0 } },
-    { geo: { lat: 51.744968125338296, lng: 19.461429908793267 }, pixel: { x: 1802, y: 882 } },
-    { geo: { lat: 51.7483180437013, lng: 19.45106338292666 }, pixel: { x: 901, y: 441 } },
+  const CONTROL_POINTS: ControlPoint[] = [
+    { geo: { lat: 51.76386584534988, lng: 19.4121958155657 }, pixel: { x: 1760, y: 844 } },
+    { geo: { lat: 51.75806095862723, lng: 19.414548850264428 }, pixel: { x: 0, y: 240 } },
+    { geo: { lat: 51.7627856307115, lng: 19.411977556925986 }, pixel: { x: 1490, y: 590 } },
+    { geo: { lat: 51.76206546134231, lng: 19.41036415746298 }, pixel: { x: 1470, y: 230 } },
   ];
 
-  const affineTransform = computeAffineTransform(CONTROL_POINTS);
+  const geoTransformer = createGeoTransformer(CONTROL_POINTS);
 
   useEffect(() => {
     if (!mapRef.current || leafletMapRef.current) return;
@@ -67,12 +68,12 @@ const MapPanel = () => {
 
       const onLocationFound = (e: L.LocationEvent) => {
         const { lat, lng } = e.latlng;
-        const { x, y } = gpsToPixel(affineTransform, lat, lng);
-        const imgLatLng = L.latLng(y, x); // remember: latlng = [pixelY, pixelX]
+        const { x, y } = geoTransformer.gpsToPixel({lat, lng});
+        const imgLatLng = L.latLng(height - y, x); // flip y against image height
 
         // scale accuracy circle radius from meters to pixels
-        const pixelsPerMeterX = Math.hypot(affineTransform.a, affineTransform.d) / metersPerDegreeLng(lat);
-        const radiusPx = (e.accuracy / 2) * pixelsPerMeterX; // rough approximation, see note below
+        const radiusPx = geoTransformer.accuracyRadiusPx(e.accuracy);
+        console.log(geoTransformer._getControlPointErrors(CONTROL_POINTS), geoTransformer._getRmsError(CONTROL_POINTS));
 
         if (!userMarker || !accuracyCircle) {
           userMarker = L.marker(imgLatLng).addTo(map).bindPopup("You are here");
