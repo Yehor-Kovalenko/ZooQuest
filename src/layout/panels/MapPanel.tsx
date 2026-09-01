@@ -8,7 +8,7 @@ import { computeAffineTransform, gpsToPixel, metersPerDegreeLng, type ControlPoi
 const MapPanel = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
-  const [gpsStatus, setGpsStatus] = useState('Acquiring GPS location...');
+  const [gps, setGps] = useState({ status: 'acquiring', text: 'Acquiring GPS...' });
   // transformation
   const CONTROL_POINTS: [ControlPoint, ControlPoint, ControlPoint] = [
     { geo: { lat: 51.75116105683058, lng: 19.436786676250716 }, pixel: { x: 0, y: 0 } },
@@ -82,12 +82,12 @@ const MapPanel = () => {
           accuracyCircle.setLatLng(imgLatLng);
           accuracyCircle.setRadius(radiusPx);
         }
-    
-        setGpsStatus(`Live GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)} (±${Math.round(e.accuracy)}m)`);
+        setGps({ status: 'active', text: `GPS Active (±${Math.round(e.accuracy)}m)` });
+        //setGpsStatus(`Live GPS: ${lat.toFixed(5)}, ${lng.toFixed(5)} (±${Math.round(e.accuracy)}m)`);
       };
 
       const onLocationError = (e: L.ErrorEvent) => {
-        setGpsStatus(`GPS Error: ${e.message}`);
+       setGps({ status: 'error', text: `GPS Error: ${e.message}` });
       };
 
       map.on("locationfound", onLocationFound);
@@ -100,7 +100,7 @@ const MapPanel = () => {
     };
 
     img.onerror = () => {
-      setGpsStatus("Failed to load map image.");
+      setGps({ status: 'error', text: "Failed to load map image." });
     };
 
     img.src = mapImage;
@@ -125,9 +125,10 @@ const MapPanel = () => {
       </div>
 
       {/* Map Container */}
-      <div className='gpsStatus' style={{color: gpsStatus.includes('Error') ? 'red' : 'black'}}>
-        {gpsStatus}
-      </div>
+      <div className={`gps-indicator gps-${gps.status}`}>
+  <div className="gps-dot"></div>
+  <span className="gps-text">{gps.text}</span>
+</div>
       
       <div ref={mapRef} className='mapContainer' />
     </div>
