@@ -560,3 +560,5 @@ export function createGeoTransformer(
     }
   };
 }
+
+export { ControlPoint };

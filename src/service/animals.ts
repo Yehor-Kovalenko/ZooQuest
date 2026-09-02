@@ -1,4 +1,4 @@
-[{
+export const ANIMALS_LIST = [{
     "animal": "giraffe",
     "lat": 51.75956203010124,
     "lng":  19.411988415212175
