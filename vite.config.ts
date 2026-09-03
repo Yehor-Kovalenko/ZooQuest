@@ -15,6 +15,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       ".ngrok-free.app",
+      "astronomy-dinghy-omen.ngrok-free.dev",
     ],
   },
 })

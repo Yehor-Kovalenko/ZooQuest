@@ -4,6 +4,7 @@ import mapImage from '@/assets/map.png'
 import 'leaflet/dist/leaflet.css';
 import './MapPanel.css';
 import { createGeoTransformer, type ControlPoint } from '@/service/geoTransformation';
+import { ANIMALS_LIST } from '@/service/animals';
 
 const MapPanel = () => {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -59,6 +60,26 @@ const MapPanel = () => {
       // Fit image to viewport
       map.fitBounds(bounds);
 
+      // --------------------------------
+      // ANIMALS LAYER
+      // --------------------------------
+      const animalLayer = L.featureGroup().addTo(map);
+
+      ANIMALS_LIST.forEach((animalInfo) => {
+        // 1. Transform real-world GPS to pixel coordinates
+        const { x, y } = geoTransformer.gpsToPixel({ 
+          lat: animalInfo.lat, 
+          lng: animalInfo.lng 
+        });
+        
+        // 2. Flip the Y axis against the image height (just like your GPS)
+        const imgLatLng = L.latLng(height - y, x);
+
+        // 3. Create the marker on the map and add a popup
+        L.marker(imgLatLng)
+          .addTo(animalLayer)
+          .bindPopup(`<strong style="text-transform: capitalize;">${animalInfo.animal}</strong>`);
+      });
       // --------------------------------
       // GPS
       // --------------------------------
