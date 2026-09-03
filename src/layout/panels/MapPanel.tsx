@@ -81,6 +81,16 @@ const MapPanel = () => {
           .bindPopup(`<strong style="text-transform: capitalize;">${animalInfo.animal}</strong>`);
       });
       // --------------------------------
+      // USER TRAIL (WALKED PATH)
+      // --------------------------------
+      // This creates an empty red dashed line on the map
+      const userTrail = L.polyline([], { 
+        color: '#ef4444', // Red color
+        weight: 4,        // Line thickness
+        opacity: 0.8,
+        dashArray: '8, 8' // Makes the line dashed
+      }).addTo(map);
+      // --------------------------------
       // GPS
       // --------------------------------
 
@@ -91,6 +101,8 @@ const MapPanel = () => {
         const { lat, lng } = e.latlng;
         const { x, y } = geoTransformer.gpsToPixel({lat, lng});
         const imgLatLng = L.latLng(height - y, x); // flip y against image height
+        // Add the newest GPS point to our trail line
+        userTrail.addLatLng(imgLatLng);
 
         // scale accuracy circle radius from meters to pixels
         const radiusPx = geoTransformer.accuracyRadiusPx(e.accuracy);
