@@ -1,154 +1,149 @@
-// [{
-//     "animal": "elephant",
-//     "time": ["11:00","17:30"],
-//     "notification_title":"Kąpiel Słoni",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "turtle",
-//     "time": ["11:30"],
-//     "notification_title":"Żółwie Brunatne",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "water_tunnel",
-//     "time": ["12:00"],
-//     "notification_title":"Nurkowania",
-//     "week_days": ["Wednesday",],
-//     "month":[],
-// },
-// {
-//     "animal": "night_animals",
-//     "time": ["13:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":["May", "June", "July", "August", "September"],
-// },
-// {
-//     "animal": "lynx",
-//     "time": ["14:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "hippo_house",
-//     "time": ["15:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "ungulates",
-//     "time": ["16:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "shark",
-//     "time": ["17:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "sun_bear",
-//     "time": ["18:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "south_america_house",
-//     "time": ["19:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "penguin",
-//     "time": ["20:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "monkey",
-//     "time": ["21:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "reptiles",
-//     "time": ["22:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "birds",
-//     "time": ["23:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "amphibians",
-//     "time": ["24:00"],  
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "insects",
-//     "time": ["25:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "aquarium",
-//     "time": ["26:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "farm_animals",
-//     "time": ["27:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "arctic_animals",
-//     "time": ["28:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "desert_animals",
-//     "time": ["29:00"],  
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "jungle_animals",
-//     "time": ["30:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// },
-// {
-//     "animal": "savannah_animals",
-//     "time": ["31:00"],
-//     "notification_title":"____",
-//     "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-//     "month":[],
-// }]
+[
+  {
+    "animal": "elephant",
+    "time": ["11:00", "17:30"],
+    "notification_title": "Kąpiel Słoni",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "asian_brown_tortoise",
+    "time": ["11:30"],
+    "notification_title": "Żółwie Brunatne",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "tamarin",
+    "time": ["11:45"],
+    "notification_title": "Pazurkowce",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": ["May", "June", "July", "August", "September"]
+  },
+  {
+    "animal": "sloth",
+    "time": ["12:00"],
+    "notification_title": "Leniwce",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "diving",
+    "time": ["12:00"],
+    "notification_title": "Nurkowania",
+    "week_days": ["Wednesday"],
+    "month": []
+  },
+  {
+    "animal": "koi_carp",
+    "time": ["12:30"],
+    "notification_title": "Karpie Koi",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": ["May", "June", "July", "August", "September"]
+  },
+  {
+    "animal": "giant_otter",
+    "time": ["12:30"],
+    "notification_title": "Arirania",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": ["May", "June", "July", "August", "September"]
+  },
+  {
+    "animal": "ring_tailed_lemur",
+    "time": ["12:45"],
+    "notification_title": "Lemury Katta",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "orangutan",
+    "time": ["13:00"],
+    "notification_title": "Orangutany",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "brazilian_porcupine",
+    "time": ["13:00"],
+    "notification_title": "Koendu",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "sun_bear",
+    "time": ["13:30"],
+    "notification_title": "Niedźwiedź Malajski",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "capybara",
+    "time": ["13:30"],
+    "notification_title": "Kapibary",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "binturong",
+    "time": ["14:00"],
+    "notification_title": "Binturongi",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "shark",
+    "time": ["14:30"],
+    "notification_title": "Rekiny",
+    "week_days": ["Tuesday", "Friday"],
+    "month": []
+  },
+  {
+    "animal": "red_panda",
+    "time": ["14:30"],
+    "notification_title": "Pandy Małe",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "ruffed_lemur",
+    "time": ["14:45"],
+    "notification_title": "Lemury Wari",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "oriental_small_clawed_otter",
+    "time": ["15:30"],
+    "notification_title": "Wyderki Orientalne",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "ring_tailed_vontsira",
+    "time": ["16:00"],
+    "notification_title": "Galidie",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": ["May", "June", "July", "August", "September"]
+  },
+  {
+    "animal": "meerkat",
+    "time": ["16:30"],
+    "notification_title": "Surykatki",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "night_pavilion",
+    "time": ["17:00"],
+    "notification_title": "Pawilon Nocny",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  },
+  {
+    "animal": "tamandua",
+    "time": ["18:00"],
+    "notification_title": "Tamanduy",
+    "week_days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "month": []
+  }
+]
